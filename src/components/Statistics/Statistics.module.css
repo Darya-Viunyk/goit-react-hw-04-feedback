@@ -1,0 +1,7 @@
+.list {
+  display: block;
+  color: rgb(61, 18, 100);
+
+  list-style-type: none;
+  text-align: left;
+}
