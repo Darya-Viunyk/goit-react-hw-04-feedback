@@ -4,33 +4,37 @@ import Section from './Section/Section';
 import Statistics from './Statistics/Statistics';
 import Notification from './Notification/Notification';
 import style from './App.module.css';
-import { type } from '@testing-library/user-event/dist/type';
+// import { type } from '@testing-library/user-event/dist/type';
 
+const listType = { good: 0, neutral: 0, bad: 0 };
 const App = () => {
-  const [sumStatistics, setSumStatistics] = useState({
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  });
+  const [sumStatistics, setSumStatistics] = useState(listType);
   const countTotalFeedback = () => {
     const { good, neutral, bad } = sumStatistics;
     return good + neutral + bad;
   };
+
   const countPositiveFeedbackPercentage = () => {
     const { good, neutral, bad } = countTotalFeedback;
     const total = good + neutral + bad;
     return total !== 0 ? Math.round((100 / total) * good) : 0;
   };
-  const onClickButton = type => {
-    setSumStatistics(prevState => {
-      const value = prevState[type];
-      return { ...prevState, [type]: value + 1 };
-    });
+
+  const onClickButton = ({
+    target: {
+      dataset: { sumStatistics },
+    },
+  }) => {
+    setSumStatistics(prevState => ({
+      ...prevState,
+      [sumStatistics]: prevState[sumStatistics] + 1,
+    }));
   };
 
   const { good, neutral, bad } = countPositiveFeedbackPercentage;
 
   const total = countTotalFeedback();
+
   return (
     <div
       style={{
