@@ -32,9 +32,5 @@ export default function Feedback({ onLeaveFeedback }) {
   );
 }
 Feedback.propTypes = {
-  options: propTypes.arrayOf(propTypes.string).isRequired,
   onLeaveFeedback: propTypes.func.isRequired,
-};
-Feedback.defaultProps = {
-  options: [],
 };
